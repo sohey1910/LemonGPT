@@ -18,15 +18,16 @@ class Chatbot():
             else:
                 count += 1
                 if count % 8 == 0:
-                    stop_stream=True
-                    return self.__build_prompt(history)
+                    pass
+                    # stop_stream=True
+                    # return self.__build_prompt(history)
         return self.__build_prompt(history)
 
 
     def __build_prompt(self,history):
         prompt=""
         for query, response in history:
-            prompt += f"\n提问：{query}"
+            # prompt += f"\n提问：{query}"
             prompt += f"\n回答：{response}"
         return prompt
 
