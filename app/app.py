@@ -22,7 +22,7 @@ def chat():
     question = request.form['question']
     # answer = chatbot.chat(question)
     answer = chatbot.predict(question, history[ip_addr])
-    print(f"ip_addr:{ip_addr}  history:{history[ip_addr]}")
+    print(f"ip_addr:{ip_addr}  history:{history[ip_addr]}  answer:{answer}")
     return jsonify({'answer': answer})
 
 
