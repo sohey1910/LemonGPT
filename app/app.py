@@ -31,7 +31,7 @@ def chat():
 def streaming():
 	def generate_dummy_data():
 		for i in range(10):
-			json_data = json.dumps({'time': time.time, 'value': random.random() * 100})
+			json_data = json.dumps({'time': time.time(), 'value': random.random() * 100})
 			yield f"data:{json_data}\n\n"
 			time.sleep(1)
 	
