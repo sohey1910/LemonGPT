@@ -37,10 +37,12 @@ def index():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    token = request.cookie.get("token")
+    token = request.cookies.get("token")
     if token not in history:
         history[token] = []
     question = request.form['question']
+    id=request.POST.get("id")
+    print(f"id:{id}")
     # answer = chatbot.chat(question)
     answer = chatbot.predict(question, copy.deepcopy(history[token]))
     print(f"token:{token}  history:{history[token]}  answer:{answer}")
@@ -48,6 +50,8 @@ def chat():
 
 @app.route('/streaming')
 def streaming():
+	id=request.GET.get("id")
+	print(f"streaming id:{id}")
 	def generate_dummy_data():
 		for i in range(10):
 			json_data = json.dumps({'time': time.time(), 'value': random.random() * 100})
