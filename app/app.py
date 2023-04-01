@@ -2,7 +2,7 @@ from flask_ngrok import run_with_ngrok
 from flask import Flask, request, jsonify, render_template, Response,stream_with_context
 # from chatbot import ChatGPT
 from chat import Chatbot
-import time
+import time,random,json
 
 app = Flask(__name__)
 run_with_ngrok(app)
@@ -31,8 +31,10 @@ def chat():
 def streaming():
 	def generate_dummy_data():
 		for i in range(10):
-			time.sleep(0.5)
-			yield str(time.time())
+			json_data = json.dumps(
+                {'time': time.time, 'value': random.random() * 100})
+			yield f"data:{json_data}\n\n"
+			time.sleep(1)
 	
 	response = Response(stream_with_context(generate_dummy_data()), mimetype="text/event-stream")
 	response.headers["Cache-Control"] = "no-cache"
@@ -40,4 +42,4 @@ def streaming():
 	return response
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True, port=5000)

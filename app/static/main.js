@@ -27,7 +27,7 @@ $(document).ready(function(){
 		// 消息监听，event 是后端返回的数据,相当于python字典
 		source.onmessage = function (event) {
 			// update_data(event);
-			console.log(event);
+			console.log(event.data);
 		}
 		source.onerror = function (event) {
 			source.close();
