@@ -30,7 +30,9 @@ def chat():
 @app.route('/streaming')
 def streaming():
 	def generate_dummy_data():
-		yield str(time.time())
+		for i in range(10):
+			time.sleep(0.5)
+			yield str(time.time())
 	
 	response = Response(stream_with_context(generate_random_data()), mimetype="text/event-stream")
 	response.headers["Cache-Control"] = "no-cache"
