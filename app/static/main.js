@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$('.submit-btn').on('click', function(){
 		var question = $('.question-input').val();
 		if (question.trim() == '') return;
-		$('.chatlogs').append('<p class="user-question">' + question + '</p>');
+		$('.chatlogs').append('<p class="user-question">提问：' + question + '</p>');
 		$('.question-input').val('');
 		$.ajax({
 			url: '/chat',
