@@ -34,7 +34,7 @@ def streaming():
 			time.sleep(0.5)
 			yield str(time.time())
 	
-	response = Response(stream_with_context(generate_random_data()), mimetype="text/event-stream")
+	response = Response(stream_with_context(generate_dummy_data()), mimetype="text/event-stream")
 	response.headers["Cache-Control"] = "no-cache"
 	response.headers["X-Accel-Buffering"] = "no"
 	return response
