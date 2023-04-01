@@ -1,8 +1,8 @@
 import openai
 import os
 
-# openai.api_key = os.environ.get("OPENAI_API_KEY")  # 设置 API 密钥
-openai.api_key=""
+openai.api_key = os.environ.get("OPENAI_API_KEY")  # 设置 API 密钥
+# openai.api_key=""
 
 class ChatGPT:
 	def __init__(self):
