@@ -3,12 +3,31 @@ from flask import Flask, request, jsonify, render_template, Response,stream_with
 # from chatbot import ChatGPT
 from chat import Chatbot
 import time,random,json
+import os,copy
+from base64 import b64encode
+
 
 app = Flask(__name__)
 run_with_ngrok(app)
 # chatbot = ChatGPT()
 chatbot = Chatbot()
 history = {}
+
+def generate_token():
+    byte_str=os.urandom(16)
+    ret=b64encode(byte_str).decode('utf-8')
+    return ret
+
+@app.route("/get_token")
+def get_token():
+    if not request.cookies.get("token",None):
+        resp = make_response('存储cookie')
+        token=generate_token()
+        record[token]=[]
+        resp.set_cookie(key='token',value=token,max_age=60*10)
+    else:
+        resp = make_response('存在cookie')
+    return resp
 
 
 @app.route('/')
@@ -18,13 +37,13 @@ def index():
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    ip_addr = request.remote_addr
-    if ip_addr not in history:
-        history[ip_addr] = []
+    token = request.cookie.get("token")
+    if token not in history:
+        history[token] = []
     question = request.form['question']
     # answer = chatbot.chat(question)
-    answer = chatbot.predict(question, history[ip_addr])
-    print(f"ip_addr:{ip_addr}  history:{history[ip_addr]}  answer:{answer}")
+    answer = chatbot.predict(question, copy.deepcopy(history[token]))
+    print(f"token:{token}  history:{history[token]}  answer:{answer}")
     return jsonify({'answer': answer})
 
 @app.route('/streaming')

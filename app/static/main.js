@@ -16,9 +16,7 @@ $(document).ready(function(){
 				$('.chatlogs').append('<p class="bot-answer">' + data.answer + '</p>');
 			}
 		});
-	});
 
-	$('.submit-btn').on('click', function(){
 		var source = new EventSource("/streaming");
 		// sse 连接开启时回调函数
 		source.onopen = function (event) {
@@ -33,5 +31,31 @@ $(document).ready(function(){
 			source.close();
 			console.log('EventSource.readyState ' + source.readyState);
 		}
+
+	});
+
+	// $('.submit-btn').on('click', function(){
+	// 	var source = new EventSource("/streaming");
+	// 	// sse 连接开启时回调函数
+	// 	source.onopen = function (event) {
+	// 		console.log('EventSource.readyState ' + source.readyState);
+	// 	}
+	// 	// 消息监听，event 是后端返回的数据,相当于python字典
+	// 	source.onmessage = function (event) {
+	// 		// update_data(event);
+	// 		console.log(event.data);
+	// 	}
+	// 	source.onerror = function (event) {
+	// 		source.close();
+	// 		console.log('EventSource.readyState ' + source.readyState);
+	// 	}
+	// });
+
+	$.ajax({
+		url: '/get_token',
+		type: 'GET',
+		success: function(data){
+				console.log(data);
+			}
 	});
 });
