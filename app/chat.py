@@ -9,12 +9,17 @@ class Chatbot():
         self.model = self.model.eval()
 
     def predict(self,question,history):
-        
         count = 0
+        stop_stream=False
         for response, history in self.model.stream_chat(self.tokenizer, question, history=history):
-            count += 1
-            if count % 8 == 0:
-                return self.__build_prompt(history)
+            if stop_stream:
+                stop_stream = False
+                break
+            else:
+                count += 1
+                if count % 8 == 0:
+                    stop_stream=True
+                    return self.__build_prompt(history)
         return self.__build_prompt(history)
 
 
