@@ -25,7 +25,7 @@ $(document).ready(function(){
 		$('.chatlogs').append('<p class="bot-answer" id='+id+'>' + "回答：" + '</p>');
 
 		$('.question-input').val('');
-		document.getElementsByClassName("submit-btn").disabled=true;
+		$('.submit-btn').disabled=true;
 		
 		$.ajax({
 			url: '/chat',
@@ -39,12 +39,13 @@ $(document).ready(function(){
 				}
 				// 消息监听，event 是后端返回的数据,相当于python字典
 				source.onmessage = function (event) {
-					update_data(event.data.answer,id);
-					console.log(event.data);
+					update_data(event.data['answer'],id);
+					console.log(event.data.answer);
+					console.log(event.data['answer']);
 				}
 				source.onerror = function (event) {
 					source.close();
-					document.getElementsByClassName("submit-btn").disabled=false;
+					$('.submit-btn').disabled=false;
 					console.log('EventSource.readyState ' + source.readyState);
 				}
 				// $('.chatlogs').append('<p class="bot-answer">' + data.answer + '</p>');
