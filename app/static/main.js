@@ -40,7 +40,7 @@ $(document).ready(function(){
 				// 消息监听，event 是后端返回的数据,相当于python字典
 				source.onmessage = function (event) {
 					var json = JSON.parse(event.data);
-					update_data(json,id);
+					update_data(json.answer,id);
 					console.log(event.data);
 					console.log(typeof(event.data));
 				}
