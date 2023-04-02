@@ -25,12 +25,10 @@ $(document).ready(function(){
 		if (question.trim() == '') return;
 		$('.chatlogs').append('<p class="user-question">提问：' + question + '</p>');
 		$('.chatlogs').append('<p class="bot-answer" id='+id+'>' + "回答：" + '</p>');
-
 		$('.question-input').val('');
 		$("input[name='qinput']").attr("readonly","readonly");
-
-		$('.question-input').readonly="readonly";
-		
+		$('.submit-btn').style.backgroundColor="gray";
+		// document.body.style.backgroundColor=arr[this._index];
 		$.ajax({
 			url: '/chat',
 			type: 'POST',
@@ -50,6 +48,7 @@ $(document).ready(function(){
 					source.close();
 					// $('.submit-btn').disabled=false;
 					$("input[name='qinput']").removeAttr("readonly");
+					$('.submit-btn').style.backgroundColor="#007bff";
 					console.log('EventSource.readyState ' + source.readyState);
 				}
 				// $('.chatlogs').append('<p class="bot-answer">' + data.answer + '</p>');
