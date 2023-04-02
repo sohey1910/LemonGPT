@@ -10,9 +10,9 @@ class Chatbot():
         self.model = self.model.eval()
 
     def predict(self,token,id):
-        question=record.record["token"]['prompt'][id]
+        question=record.record[token]['prompt'][id]
         history=[]
-        for _id,value in record.record["token"]['prompt'].items():
+        for _id,value in record.record[token]['prompt'].items():
             if _id!=id:
                 question=value['question']
                 answer=value['answer']
