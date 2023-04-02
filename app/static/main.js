@@ -41,8 +41,6 @@ $(document).ready(function(){
 				source.onmessage = function (event) {
 					var json = JSON.parse(event.data);
 					update_data(json.answer,id);
-					console.log(event.data);
-					console.log(typeof(event.data));
 				}
 				source.onerror = function (event) {
 					source.close();

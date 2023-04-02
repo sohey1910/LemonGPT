@@ -71,29 +71,19 @@ def chat():
 		}
     question = request.form['question']
     id=request.values.get("id")
-    print(f"id:{id}")
+    print(f"id:{id}  question:{question} token:{token}")
     # answer = chatbot.chat(question)
     record.record[token]['prompt'][id]={
 		"question":question,
 		"answer":""
 	}
-    # answer = chatbot.predict(question, copy.deepcopy(history[token]["prompt"]))
-    # print(f"token:{token}  history:{history[token]}  answer:{answer}")
-    # return jsonify({'answer': answer})
     return jsonify({"ec":0,"em":"success","result":""})
 
 @app.route('/streaming')
 def streaming():
 	token=request.cookies.get("token")
 	id=request.values.get("id")
-	# chatbot.predict(token,id)
-	# print(f"streaming id:{id}")
-	# def generate_dummy_data():
-	# 	for i in range(10):
-	# 		json_data = json.dumps({'time': time.time(), 'value': random.random() * 100})
-	# 		yield f"data:{json_data}\n\n"
-	# 		time.sleep(1)
-	
+	print(f"streaming token:{token}  id:{id}")
 	response = Response(stream_with_context(chatbot.predict(token,id)), mimetype="text/event-stream")
 	response.headers["Cache-Control"] = "no-cache"
 	response.headers["X-Accel-Buffering"] = "no"
