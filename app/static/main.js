@@ -22,7 +22,7 @@ $(document).ready(function(){
 
 		if (question.trim() == '') return;
 		$('.chatlogs').append('<p class="user-question">提问：' + question + '</p>');
-		$('.chatlogs').append('<p class="bot-answer">' + "" + '</p>');
+		$('.chatlogs').append('<p class="bot-answer" id='+id+'>' + "" + '</p>');
 
 		$('.question-input').val('');
 		document.getElementsByClassName("question-input").disabled=true;
@@ -44,7 +44,7 @@ $(document).ready(function(){
 				}
 				source.onerror = function (event) {
 					source.close();
-					document.getElementsByClassName("question-input").setAttribute("disabled", false);
+					document.getElementsByClassName("question-input").disabled=false;
 					console.log('EventSource.readyState ' + source.readyState);
 				}
 				// $('.chatlogs').append('<p class="bot-answer">' + data.answer + '</p>');
