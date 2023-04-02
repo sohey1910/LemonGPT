@@ -18,14 +18,18 @@ function update_data(data,id){
 $(document).ready(function(){
 	$('.submit-btn').on('click', function(){
 		var question = $('.question-input').val();
+		if (question == undefined || question == null || question == ''){
+			return;
+		}
 		var id=randomChar(6);
-
 		if (question.trim() == '') return;
 		$('.chatlogs').append('<p class="user-question">提问：' + question + '</p>');
 		$('.chatlogs').append('<p class="bot-answer" id='+id+'>' + "回答：" + '</p>');
 
 		$('.question-input').val('');
-		$('.submit-btn').disabled=true;
+		$("input[name='qinput']").attr("readonly","readonly");
+
+		$('.question-input').readonly="readonly";
 		
 		$.ajax({
 			url: '/chat',
@@ -44,7 +48,8 @@ $(document).ready(function(){
 				}
 				source.onerror = function (event) {
 					source.close();
-					$('.submit-btn').disabled=false;
+					// $('.submit-btn').disabled=false;
+					$("input[name='qinput']").removeAttr("readonly");
 					console.log('EventSource.readyState ' + source.readyState);
 				}
 				// $('.chatlogs').append('<p class="bot-answer">' + data.answer + '</p>');
