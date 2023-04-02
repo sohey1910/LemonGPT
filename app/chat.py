@@ -51,7 +51,7 @@ class Chatbot():
         yield self.__format_response(question,diff)
 
     def __format_response(self,question,response):
-        json_data=json.dumps({'question':question,'answer':response})
+        json_data=json.dumps({'question':question,'answer':response},ensure_ascii=False)
         return f"data:{json_data}\n\n"
 
 
