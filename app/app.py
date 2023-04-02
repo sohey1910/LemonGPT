@@ -27,7 +27,10 @@ def generate_token():
 def del_timeout_token():
 	while True:
 		try:
-			for key,value in record.record.items():
+			keys=list(record.record.keys())
+			# for key,value in record.record.items():
+			for key in keys:
+				value=record.record[key]
 				exists_time=time.time()-value['create_time']
 				if exists_time > TOKEN_TIME_OUT:
 					del record.record[key]
