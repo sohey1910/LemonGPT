@@ -27,7 +27,7 @@ $(document).ready(function(){
 		$('.chatlogs').append('<p class="bot-answer" id='+id+'>' + "回答：" + '</p>');
 		$('.question-input').val('');
 		$("input[name='qinput']").attr("readonly","readonly");
-		$('.submit-btn').style.backgroundColor="gray";
+		//$('.submit-btn').style.backgroundColor="gray";
 		// document.body.style.backgroundColor=arr[this._index];
 		$.ajax({
 			url: '/chat',
@@ -48,7 +48,7 @@ $(document).ready(function(){
 					source.close();
 					// $('.submit-btn').disabled=false;
 					$("input[name='qinput']").removeAttr("readonly");
-					$('.submit-btn').style.backgroundColor="#007bff";
+					//$('.submit-btn').style.backgroundColor="#007bff";
 					console.log('EventSource.readyState ' + source.readyState);
 				}
 				// $('.chatlogs').append('<p class="bot-answer">' + data.answer + '</p>');
