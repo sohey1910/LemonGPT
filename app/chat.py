@@ -22,9 +22,9 @@ class Chatbot():
         history=[]
         for _id,value in record.record[token]['prompt'].items():
             if _id!=id:
-                question=value.get("question","")
+                _question=value.get("question","")
                 answer=value.get("answer","")
-                history.append((question,answer))
+                history.append((_question,answer))
         print(f"predict question:{question} history:{history}")
         count = 0
         stop_stream=False
@@ -36,7 +36,7 @@ class Chatbot():
                 break
             else:
                 count += 1
-                if count % 8 == 0:
+                if count % 2 == 0:
                     cur=history[-1][1]
                     diff=self._sub_new_generate(pre,cur)
                     pre=cur
