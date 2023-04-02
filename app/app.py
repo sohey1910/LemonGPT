@@ -2,7 +2,7 @@ from flask_ngrok import run_with_ngrok
 from flask import Flask, request, jsonify, render_template, Response,stream_with_context
 # from chatbot import ChatGPT
 from chat import Chatbot
-from dataType import record
+from data import record
 
 import time,random,json
 import os,copy,traceback
