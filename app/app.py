@@ -1,5 +1,5 @@
 from flask_ngrok import run_with_ngrok
-from flask import Flask, request, jsonify, render_template, Response,stream_with_context
+from flask import Flask, request, jsonify, render_template, Response,stream_with_context,make_response
 # from chatbot import ChatGPT
 from chat import Chatbot
 from data import record
@@ -91,7 +91,7 @@ def streaming():
 	# 		yield f"data:{json_data}\n\n"
 	# 		time.sleep(1)
 	
-	response = Response(stream_with_context(chatbot.predict()), mimetype="text/event-stream")
+	response = Response(stream_with_context(chatbot.predict(token,id)), mimetype="text/event-stream")
 	response.headers["Cache-Control"] = "no-cache"
 	response.headers["X-Accel-Buffering"] = "no"
 	return response
