@@ -25,7 +25,7 @@ $(document).ready(function(){
 		$('.chatlogs').append('<p class="bot-answer">' + "" + '</p>');
 
 		$('.question-input').val('');
-		document.getElementsByClassName("question-input").setAttribute("disabled", true);
+		document.getElementsByClassName("question-input").disabled=true;
 		
 		$.ajax({
 			url: '/chat',
