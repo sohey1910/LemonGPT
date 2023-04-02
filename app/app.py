@@ -10,7 +10,7 @@ from base64 import b64encode
 from threading import Thread
 from collections import OrderedDict
 
-TOKEN_TIME_OUT=60*5
+TOKEN_TIME_OUT=60*60*5
 
 app = Flask(__name__)
 run_with_ngrok(app)
